@@ -18,7 +18,7 @@ class Header extends Component {
 
                     <Nav>
                         <Nav.Link href="SignIn">Sign In</Nav.Link>
-                        <Nav.Link eventKey={2} href="SignUp">
+                        <Nav.Link href="SignUp">
                             Sign Up
                         </Nav.Link>
                     </Nav>
