@@ -1,32 +1,46 @@
 import React, {Component} from 'react';
-
 import {BrowserRouter, Route} from "react-router-dom";
-
-import Header from './Header/Header';
-import Register from './Header/Register';
-import Login from './Header/Login';
+import {createStore} from "redux";
+import {Provider} from "react-redux";
+import allRedusers from './store/reducer';
+import Header from './components/Header';
+import Task from './components/Task';
+import Home from './components/Home'
+import AddTaskContainer from './components/AddTaskContainer';
+import SignInContainer from './components/SignInContainer';
+import SignUpContainer from './components/SignUpContainer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Task from './Task/Task';
 
-import './App.css';
+
+
+const store = createStore(
+    allRedusers,
+    {},
+    );
 
 class App extends Component {
     render() {
         return (
-            <BrowserRouter clasName>
-                <div className="App" align='center'>
-                    <Header/>
-                    <Route path='/home' component={Task}/>
+            <Provider store={store}>
+                <BrowserRouter>
+                    <div className="App" align='center'>
+                        <Route path='/' component={Header}/>
 
-                    <Route exact path='/tasks' component={Task}/>
+                        <Route exact path='/' component={SignInContainer}/>
 
-                    <Route path='/SignUp' component={Register}/>
+                        <Route exact path='/tasks' component={Task}/>
 
-                    <Route path='/SignIn' component={Login}/>
+                        <Route exact path='/home' component={Home}/>
 
-                </div>
-            </BrowserRouter>
+                        <Route exact path='/newTask' component={AddTaskContainer}/>
+
+                        <Route path='/SignUp' component={SignUpContainer}/>
+
+                        <Route path='/SignIn' component={SignInContainer}/>
+                    </div>
+                </BrowserRouter>
+            </Provider>
         );
     }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 
 import Card from 'react-bootstrap/Card';
 import Button from "react-bootstrap/Button";
-import s from "./Task.module.css";
+import s from "../componentsStyle/Task.module.css";
 
 
 class Task extends React.Component {
