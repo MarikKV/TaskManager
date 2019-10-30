@@ -9,6 +9,8 @@ class Task extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            users:'',
+            username: '',
             error: null,
             isLoaded: false,
             items: []
@@ -16,20 +18,9 @@ class Task extends React.Component {
     }
 
     componentDidMount() {
-        fetch('https://api.gastroli.ua/v2/events/filter?locale=uk&public_key=3638eeb29dff9f8bb81f72e805769df0&filter%5Bcity_id%5D=1&limit=12&offset=24')
-            .then(res => res.json())
-            .then(json => {
-                    this.setState({
-                        isLoaded: true,
-                        items: json,
-                    })
-                },
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                })
+        this.state.users = localStorage.getItem('users');
+        this.state.username = localStorage.getItem('CurrentUser');
+        console.log(this.state)
     }
 
     render() {
@@ -41,7 +32,7 @@ class Task extends React.Component {
         } else {
             return (
                 <div>
-                        {items.event_categories.map(item => (
+                        {items.tasks.map(item => (
                             <div className={s.task_block}  key={item.name}>
                                 <Card className="text-center">
                                     <Card.Header>Featured</Card.Header>
@@ -64,6 +55,9 @@ class Task extends React.Component {
     }
     alertClicked(x) {
         console.log(x);
+        this.state.users = localStorage.getItem('users');
+        this.state.username = localStorage.getItem('CurrentUser');
+        console.log(this.state)
     }
     alertClicked2(x) {
         console.log('deleted: ', x);

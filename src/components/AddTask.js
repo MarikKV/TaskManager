@@ -17,6 +17,7 @@ class AddTask extends Component {
         this.onChangeSharename = this.onChangeSharename.bind(this);
         this.onChangeShare = this.onChangeShare.bind(this);
         this.onChangeTaskDeadline = this.onChangeTaskDeadline.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     onChangeTaskname(e) {
@@ -36,7 +37,26 @@ class AddTask extends Component {
     }
     onSubmit(e) {
         e.preventDefault();
-        
+        let users =  JSON.parse(localStorage.getItem('users'));
+        let username = localStorage.getItem('CurrentUser');
+        console.log(username, users);
+        let user;
+        let newTask = {
+            taskname: this.props.taskname, 
+            taskdescribe: this.props.taskdescribe,
+            shareTo: this.props.shareTo,
+            deadline: this.props.deadline
+        }
+        for(user in users){ 
+            console.log(users[user].name);
+    
+            if(users[user].name == username){
+                users[user].tasks.push(newTask)
+                console.log('task added to tasks')
+            }
+        }
+        localStorage.setItem('users', JSON.stringify(users))
+        console.log('task added')
     }
     render() {
         let shareblock;
