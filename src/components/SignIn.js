@@ -27,9 +27,12 @@ class SignIn extends Component {
         console.log('signining');
         for(user in users){     
             let userName;
+            let userEmail
             if(users[user].email == this.props.email && users[user].password == this.props.password){
                 userName = users[user].name;
+                userEmail = users[user].email;
                 localStorage.setItem('CurrentUser', userName);
+                localStorage.setItem('CurrentUserEmail', userEmail);
                 window.location.href = '/home';
             } else{
                 console.log('wrong email or password')

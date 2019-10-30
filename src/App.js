@@ -11,9 +11,6 @@ import SignInContainer from './components/SignInContainer';
 import SignUpContainer from './components/SignUpContainer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-
-
 const store = createStore(
     allRedusers,
     {},

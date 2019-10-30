@@ -49,14 +49,13 @@ class AddTask extends Component {
         }
         for(user in users){ 
             console.log(users[user].name);
-    
             if(users[user].name == username){
                 users[user].tasks.push(newTask)
                 console.log('task added to tasks')
             }
         }
         localStorage.setItem('users', JSON.stringify(users))
-        console.log('task added')
+        console.log('task added');
     }
     render() {
         let shareblock;
