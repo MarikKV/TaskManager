@@ -5,7 +5,6 @@ export const SIGNUP_CHANGE_NICKNAME_TEXT = 'SIGNUP_CHANGE_NICKNAME_TEXT';
 export const SIGNUP_CHANGE_DISABLED = 'SIGNUP_CHANGE_DISABLED';
 
 
-
 export const setEmailText = email => ({
     type: SIGNUP_CHANGE_EMAIL_TEXT,
     payload: email

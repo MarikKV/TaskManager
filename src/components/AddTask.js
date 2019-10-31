@@ -11,12 +11,13 @@ import s from "../componentsStyle/Task.module.css";
 class AddTask extends Component {
     constructor(props) {
         super(props)
-        
+        this.state={
+            id: 0
+        }
         this.onChangeTaskname = this.onChangeTaskname.bind(this);
         this.onChangeTaskdescribe= this.onChangeTaskdescribe.bind(this);
         this.onChangeSharename = this.onChangeSharename.bind(this);
         this.onChangeShare = this.onChangeShare.bind(this);
-        this.onChangeTaskDeadline = this.onChangeTaskDeadline.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -25,9 +26,6 @@ class AddTask extends Component {
     }
     onChangeTaskdescribe(e) {
         this.props.setTaskdescribeText(e.target.value);
-    }
-     onChangeTaskDeadline(e) {
-        this.props.setDeadlineDate(e.target.value);
     }
     onChangeSharename(e) {
         this.props.setShareToText(e.target.value);
@@ -40,18 +38,26 @@ class AddTask extends Component {
         let users =  JSON.parse(localStorage.getItem('users'));
         let username = localStorage.getItem('CurrentUser');
         console.log(username, users);
+        for(user in users){ 
+            console.log(users[user].name);
+            if(users[user].name == username){
+                this.state.id = users[user].tasks.length;
+            }
+        }
         let user;
         let newTask = {
+            id: this.state.id,
             taskname: this.props.taskname, 
             taskdescribe: this.props.taskdescribe,
             shareTo: this.props.shareTo,
-            deadline: this.props.deadline
         }
         for(user in users){ 
             console.log(users[user].name);
             if(users[user].name == username){
-                users[user].tasks.push(newTask)
-                console.log('task added to tasks')
+                let tasksNum = users[user].tasks.length;      
+                this.setState({id: tasksNum + 1});
+                users[user].tasks.push(newTask);
+                console.log('task added to tasks');
             }
         }
         localStorage.setItem('users', JSON.stringify(users))
@@ -61,11 +67,11 @@ class AddTask extends Component {
         let shareblock;
         if(this.props.share === 'true'){
             shareblock = <Form.Group controlId="formBasicEmail">
-            <Form.Label className={s.new_task_label}>Share to add nickname yo want to share</Form.Label>
+            <Form.Label className={s.new_task_label}>Add email of user yo want to share a task</Form.Label>
             <Form.Control 
                 name="shareTo" 
                 type="text" 
-                placeholder="Enter nickname to share" 
+                placeholder="Enter email to share" 
                 onChange={this.onChangeSharename} />
          </Form.Group>
         }
@@ -94,16 +100,6 @@ class AddTask extends Component {
                             placeholder="Describe a task" 
                             value={this.props.taskdescribe}
                             onChange={this.onChangeTaskdescribe} />
-                    </Form.Group>
-
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Deadline</Form.Label>
-                        <Form.Control 
-                            name="date" 
-                            type="date" 
-                            placeholder="Chuse a date" 
-                            value={this.props.deadline}
-                            onChange={this.onChangeTaskDeadline} />
                     </Form.Group>
                     
                     <fieldset>
