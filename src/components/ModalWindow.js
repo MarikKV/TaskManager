@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Modal from 'react-bootstrap/Modal';
 import {Button} from "react-bootstrap";
+import Alert from 'react-bootstrap/Alert';
 import Form from "react-bootstrap/Form";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import s from "../componentsStyle/Task.module.css";
@@ -25,7 +26,7 @@ class ModalWindow extends Component{
     }
     onSubmit(e) {
         e.preventDefault();
-        console.log('ok3 ', this.props.task.id, this.props)
+        //console.log(this.props.task.id, this.props)
         let taskId = this.props.task.id;
         let users =  JSON.parse(localStorage.getItem('users'));
         let username = localStorage.getItem('CurrentUser');
@@ -36,7 +37,7 @@ class ModalWindow extends Component{
             for(user in users){ 
                 console.log(users[user].name);
                 if(users[user].name == username){ 
-                    console.log(users[user].tasks, 'редагували потрібний таск ',users[user].tasks[taskId])
+                    //console.log(users[user].tasks, 'редагували потрібний таск ',users[user].tasks[taskId])
                     users[user].tasks[taskId].taskname = this.props.taskname;
                     users[user].tasks[taskId].taskdescribe= this.props.taskdescribe;
                 }
@@ -44,19 +45,18 @@ class ModalWindow extends Component{
         } else {           
              console.log('share', )
              for(user in users){ 
-                console.log(users[user].name);
+                //console.log(users[user].name);
                 if(users[user].email !== useremail){ 
-                    console.log(users[user].tasks, 'редагували потрібний таск ',users[user].tasks[taskId])
+                    //console.log(users[user].tasks, 'редагували потрібний таск ',users[user].tasks[taskId])
                     users[user].tasks[taskId].taskname = this.props.taskname;
                     users[user].tasks[taskId].taskdescribe= this.props.taskdescribe;
                 }
             }
         }
         localStorage.setItem('users', JSON.stringify(users))
-        console.log('task edited');
+        //console.log('task edited');
     }
     render(){
-        
         return(
             <Modal
                 {...this.props}
@@ -71,8 +71,6 @@ class ModalWindow extends Component{
                 </Modal.Header>
                 <Modal.Body>
                     <h4>Centered Modal</h4>
-                    {console.log(this.props)}
-
                     <Form onSubmit={this.onSubmit} className={s.new_task_block}>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label className={s.new_task_label}>Task name</Form.Label>
@@ -94,7 +92,7 @@ class ModalWindow extends Component{
                             placeholder="Describe a task" 
                             onChange={this.onChangeTaskdescribe} />
                     </Form.Group>
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" type="submit" onClick={this.props.onHide}>
                         Submit
                     </Button>                    
                     <Button variant="warning" onClick={this.props.onHide}>Close</Button>
