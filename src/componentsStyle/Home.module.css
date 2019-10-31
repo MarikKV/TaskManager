@@ -1,0 +1,19 @@
+.tasks_info_block{
+    width: 50%;
+    background-color: #e5ffad;
+    float: left;
+    margin: 50px 0 0 25%;
+    font-family: cursive;
+}
+.tasks_info_right, .tasks_info_left{
+    width: 50%;
+    float: left;
+    color: #282926;
+}
+.tasks_info_right{
+    text-align: left;
+}
+.tasks_info_left{
+    text-align: right;
+    padding: 20px 20px 0 0;
+}

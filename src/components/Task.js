@@ -121,7 +121,7 @@ class Task extends React.Component {
                                         </Card.Text>
                                         <Button variant="primary" onClick={() => this.setState({showModal: true, taskToEdit: item})}>Edit</Button>
                                     </Card.Body>
-                                    <Card.Footer className="text-muted">info</Card.Footer>
+                                    <Card.Footer className="text-muted"></Card.Footer>
                                 </Card>
                             </div>
                         ))}

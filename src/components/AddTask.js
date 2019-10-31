@@ -2,6 +2,7 @@ import React, {Component} from "react";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Alert from 'react-bootstrap/Alert';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,7 +13,8 @@ class AddTask extends Component {
     constructor(props) {
         super(props)
         this.state={
-            id: 0
+            id: 0,
+            taskadded: false
         }
         this.onChangeTaskname = this.onChangeTaskname.bind(this);
         this.onChangeTaskdescribe= this.onChangeTaskdescribe.bind(this);
@@ -61,9 +63,20 @@ class AddTask extends Component {
             }
         }
         localStorage.setItem('users', JSON.stringify(users))
-        console.log('task added');
+        
+        this.setState({taskadded: true})
+        setTimeout(() => this.setState({taskadded: false}), 2000);
     }
     render() {
+        //message that shows you add task
+        let taskadded;
+        if(this.state.taskadded == true){
+            taskadded = <Alert variant='success'><b>Task added</b></Alert> 
+        }
+        if(this.state.taskadded == false){
+            taskadded = <div></div>
+        }
+        //block for input to share task to other user
         let shareblock;
         if(this.props.share === 'true'){
             shareblock = <Form.Group controlId="formBasicEmail">
@@ -80,6 +93,7 @@ class AddTask extends Component {
         }
             return (
                 <div>
+                    {taskadded}
                     <Form onSubmit={this.onSubmit} className={s.new_task_block}>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label className={s.new_task_label}>Task name</Form.Label>

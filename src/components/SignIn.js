@@ -2,6 +2,7 @@ import React, {Component} from "react";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Alert from 'react-bootstrap/Alert';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import s from '../componentsStyle/Header.module.css';
@@ -9,6 +10,9 @@ import s from '../componentsStyle/Header.module.css';
 class SignIn extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            faillogin: null
+        }
         
         this.onSubmit = this.onSubmit.bind(this);
         this.onEmailChange = this.onEmailChange.bind(this);
@@ -36,12 +40,24 @@ class SignIn extends Component {
                 window.location.href = '/home';
             } else{
                 console.log('wrong email or password')
+                this.setState({
+                    faillogin: false
+                })
             }
         }
     }
-    render() {        
-        return (
-            <div className={s.form_sign_in}>
+    render() {     
+        let faillogin;
+        if(this.state.faillogin == false){
+            faillogin = <Alert variant='danger'> Wrong email or passwor</Alert> 
+        }
+        if(this.state == null){
+            faillogin = <div></div>
+        }
+        return ( 
+            <div className={s.form_sign_in}> 
+            <br />
+            {faillogin}
                 <Form onSubmit={this.onSubmit}>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
