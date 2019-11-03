@@ -1,4 +1,6 @@
 ### Task manager app
+### Used: React.js, Redux, react-bootstrap, localstorage.
+
 All data saved in localstorage. 
 1. You can add new user(SignUn)
 2. Login to app(SignIn)
