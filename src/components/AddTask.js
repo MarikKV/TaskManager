@@ -65,7 +65,7 @@ class AddTask extends Component {
         localStorage.setItem('users', JSON.stringify(users))
         
         this.setState({taskadded: true})
-        setTimeout(() => this.setState({taskadded: false}), 2000);
+        setTimeout(() => this.setState({taskadded: false}), 1500);
     }
     render() {
         //message that shows you add task

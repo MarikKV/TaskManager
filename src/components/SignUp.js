@@ -1,12 +1,16 @@
 import React, {Component} from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import s from "../componentsStyle/Header.module.css";
 
 class SignUp extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            passCheck: null
+        }
 
         this.onSubmit = this.onSubmit.bind(this);
         this.onNicknameChange = this.onNicknameChange.bind(this);
@@ -33,8 +37,14 @@ class SignUp extends Component {
         this.props.setRepeatPasswordText(e.target.value);
         if(e.target.value === this.props.password) {
             this.props.setDisabledText('');
+            this.setState({
+                passCheck: true
+            })
         }
         else {
+            this.setState({
+                passCheck: false
+            })
             console.log('not ok');
             this.props.setDisabledText('disabled');
         }
@@ -57,6 +67,13 @@ class SignUp extends Component {
         window.location.href = '/SignIn';
     }
     render() {
+        let passCheck;
+        if(this.state.passCheck == false){
+            passCheck = <Alert variant='danger'>password do not match</Alert> 
+        }
+        if(this.state.login == true){
+            passCheck = <div></div>
+        }
         return (
             <div className={s.form_sign_in}>
                 <Form onSubmit={this.onSubmit}>
@@ -92,6 +109,8 @@ class SignUp extends Component {
                             value={this.props.password}
                             onChange={this.onPasswordChange} />
                     </Form.Group>
+
+                    {passCheck}
 
                     <Form.Group controlId="confirmFormBasicPassword">
                         <Form.Label>Confirm your password</Form.Label>

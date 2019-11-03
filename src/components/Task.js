@@ -56,7 +56,9 @@ class Task extends React.Component {
     }
     deleteTask(x) {
         console.log('deleted: ', x);
-        let taskId = x.id;
+        let taskId = x.id;       
+        this.setState({isLoaded: false})
+
         let users = JSON.parse(localStorage.getItem('users'));
         let username = localStorage.getItem('CurrentUser');
         let user;
@@ -65,21 +67,66 @@ class Task extends React.Component {
             if(users[user].name == username){
                 users[user].tasks.splice(taskId, 1);
                 console.log(users[user].tasks);
+                let task;
+                let allTasks=[];
+                for(task in users[user].tasks){
+                    if(users[user].tasks[task].id >= taskId){
+                        console.log(users[user].tasks[task])
+                        users[user].tasks[task].id--; 
+                    }
+                    allTasks.push(users[user].tasks[task]);
                 }
+                this.setState({
+                    items: allTasks
+                });
             }
+        }
         localStorage.setItem('users', JSON.stringify(users)); 
-        this.setState({isLoaded: false})
-        setTimeout(() => this.setState({isLoaded: true}), 200);
+        setTimeout(() => this.setState({isLoaded: true}), 800);
 
         //window.location.href = '/tasks';
     }
     render() {
         const {error, isLoaded, items, shareItems} = this.state;
         let hideModal = () => this.setState({showModal: false})
+        let refreshTasks = () => {
+            
+            setTimeout(() => {
+            //this.setState({isLoaded: false})
+            let users = JSON.parse(localStorage.getItem('users'));
+            let username = localStorage.getItem('CurrentUser');
+            let useremail = localStorage.getItem('CurrentUserEmail');
+            let user;      
+            let SharedTasks = [];
+    
+            for(user in users){
+                if(users[user].name == username){
+                    let task;
+                    let allTasks=[];
+                    for(task in users[user].tasks){
+                        allTasks.push(users[user].tasks[task]);
+                    }
+                    this.setState({
+                        items: allTasks
+                    }); 
+                }
+                let task;
+                for(task in users[user].tasks){
+                    if(users[user].tasks[task].shareTo == useremail){
+                        SharedTasks.push(users[user].tasks[task]);                     
+                    }  
+                    this.setState({
+                        shareItems: SharedTasks
+                    });              
+                }    
+            }      
+            console.log('refreshed');
+            this.setState({showModal: false});
+        }, 500)}
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
-            return <div>Loading...</div>;
+            return <div className={s.lds_roller}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>;
         } else {
             return (
                 <Card>
@@ -95,8 +142,8 @@ class Task extends React.Component {
                                             {item.taskdescribe}<br />
                                         </Card.Text>
                                         <ButtonToolbar>
-                                            <Button variant="primary" onClick={() => this.setState({showModal: true, taskToEdit: item})}>Edit</Button>
-                                            <Button variant="danger" onClick={() => this.deleteTask(item)}>Delete</Button>
+                                            <Button variant="primary" onClick={() => this.setState({showModal: true, taskToEdit: item})}>Edit &#9998;</Button>
+                                            <Button align='right' variant="danger" onClick={() => this.deleteTask(item)}>Delete &#xe020;</Button>
                                         </ButtonToolbar>
                                     </Card.Body>
                                     <Card.Footer className="text-muted"></Card.Footer>
@@ -104,7 +151,13 @@ class Task extends React.Component {
                             </div>
                         ))}
                     </div>
-                    <ModalWindowContainer show={this.state.showModal} onHide={hideModal} task={this.state.taskToEdit}/>
+
+                    <ModalWindowContainer 
+                        show={this.state.showModal} 
+                        onHide={hideModal} 
+                        task={this.state.taskToEdit}
+                        refreshTasks={refreshTasks}
+                    />
 
                     <br />
                     <div className={s.card_blok}>

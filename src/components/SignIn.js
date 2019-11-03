@@ -11,7 +11,7 @@ class SignIn extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            faillogin: null
+            login: null
         }
         
         this.onSubmit = this.onSubmit.bind(this);
@@ -37,21 +37,22 @@ class SignIn extends Component {
                 userEmail = users[user].email;
                 localStorage.setItem('CurrentUser', userName);
                 localStorage.setItem('CurrentUserEmail', userEmail);
+                this.setState({login: true});
                 window.location.href = '/home';
             } else{
                 console.log('wrong email or password')
                 this.setState({
-                    faillogin: false
+                    login: null
                 })
             }
         }
     }
     render() {     
         let faillogin;
-        if(this.state.faillogin == false){
+        if(this.state.login == false){
             faillogin = <Alert variant='danger'> Wrong email or passwor</Alert> 
         }
-        if(this.state == null){
+        if(this.state.login == true){
             faillogin = <div></div>
         }
         return ( 

@@ -25,7 +25,7 @@ const mapStateToProps = (state) => {
         taskname: state.addtask.taskname,
         taskdescribe: state.addtask.taskdescribe,
         share: state.addtask.share,
-        shareTo: state.addtask.shareTo,
+        shareTo: state.addtask.shareTo
     };
 }
 

@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import Modal from 'react-bootstrap/Modal';
 import {Button} from "react-bootstrap";
-import Alert from 'react-bootstrap/Alert';
 import Form from "react-bootstrap/Form";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import s from "../componentsStyle/Task.module.css";
@@ -16,7 +15,6 @@ class ModalWindow extends Component{
         this.onChangeTaskname = this.onChangeTaskname.bind(this);
         this.onChangeTaskdescribe= this.onChangeTaskdescribe.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-
     }
     onChangeTaskname(e) {
         this.props.setTasknameText(e.target.value);
@@ -37,17 +35,16 @@ class ModalWindow extends Component{
             for(user in users){ 
                 console.log(users[user].name);
                 if(users[user].name == username){ 
-                    //console.log(users[user].tasks, 'редагували потрібний таск ',users[user].tasks[taskId])
+                    //console.log(users[user].tasks, 'edit task: ',users[user].tasks[taskId])
                     users[user].tasks[taskId].taskname = this.props.taskname;
                     users[user].tasks[taskId].taskdescribe= this.props.taskdescribe;
                 }
             }
-        } else {           
-             console.log('share', )
+        } else {
              for(user in users){ 
                 //console.log(users[user].name);
                 if(users[user].email !== useremail){ 
-                    //console.log(users[user].tasks, 'редагували потрібний таск ',users[user].tasks[taskId])
+                    //console.log(users[user].tasks, 'edit task: ',users[user].tasks[taskId])
                     users[user].tasks[taskId].taskname = this.props.taskname;
                     users[user].tasks[taskId].taskdescribe= this.props.taskdescribe;
                 }
@@ -83,7 +80,7 @@ class ModalWindow extends Component{
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEmail">
-                        <Form.Label className={s.new_task_label}>Task describe</Form.Label>
+                        <Form.Label className={s.new_task_label}>Task desscribe</Form.Label>
                         <Form.Control 
                             className={s.describe_field} 
                             name="taskdescribe" 
@@ -92,7 +89,7 @@ class ModalWindow extends Component{
                             placeholder="Describe a task" 
                             onChange={this.onChangeTaskdescribe} />
                     </Form.Group>
-                    <Button variant="primary" type="submit" onClick={this.props.onHide}>
+                    <Button variant="primary" type="submit" onClick={this.props.refreshTasks}>
                         Submit
                     </Button>                    
                     <Button variant="warning" onClick={this.props.onHide}>Close</Button>

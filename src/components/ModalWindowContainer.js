@@ -9,6 +9,7 @@ class ModalWindowContainer extends Component {
         return <ModalWindow
             show={this.props.show} 
             onHide={this.props.onHide}
+            refreshTasks={this.props.refreshTasks}
             task={this.props.task}
             taskname={this.props.taskname} 
             taskdescribe={this.props.taskdescribe} 
