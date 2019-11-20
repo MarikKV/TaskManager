@@ -1,14 +1,14 @@
 {
   "main.css": "/TaskManager/static/css/main.1ab7fb27.chunk.css",
-  "main.js": "/TaskManager/static/js/main.0797c7cf.chunk.js",
-  "main.js.map": "/TaskManager/static/js/main.0797c7cf.chunk.js.map",
+  "main.js": "/TaskManager/static/js/main.5d86cc8c.chunk.js",
+  "main.js.map": "/TaskManager/static/js/main.5d86cc8c.chunk.js.map",
   "runtime~main.js": "/TaskManager/static/js/runtime~main.ae49988c.js",
   "runtime~main.js.map": "/TaskManager/static/js/runtime~main.ae49988c.js.map",
   "static/css/2.5e80a4c0.chunk.css": "/TaskManager/static/css/2.5e80a4c0.chunk.css",
   "static/js/2.9d57cbcd.chunk.js": "/TaskManager/static/js/2.9d57cbcd.chunk.js",
   "static/js/2.9d57cbcd.chunk.js.map": "/TaskManager/static/js/2.9d57cbcd.chunk.js.map",
   "index.html": "/TaskManager/index.html",
-  "precache-manifest.4d1fce66e1840f8751a18b257a74ce76.js": "/TaskManager/precache-manifest.4d1fce66e1840f8751a18b257a74ce76.js",
+  "precache-manifest.c43f031a96e833c6d6368bbcc5f2b7e5.js": "/TaskManager/precache-manifest.c43f031a96e833c6d6368bbcc5f2b7e5.js",
   "service-worker.js": "/TaskManager/service-worker.js",
   "static/css/2.5e80a4c0.chunk.css.map": "/TaskManager/static/css/2.5e80a4c0.chunk.css.map",
   "static/css/main.1ab7fb27.chunk.css.map": "/TaskManager/static/css/main.1ab7fb27.chunk.css.map"
